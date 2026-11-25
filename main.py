@@ -43,6 +43,11 @@ def self_check(text: str) -> None:
         raise ValueError("entry must be a single line")
     if not text.strip():
         raise ValueError("entry must not be only whitespace")
+    if text != text.strip():
+        raise ValueError("entry must not start or end with whitespace")
+    for char in text:
+        if ord(char) < 0x20:
+            raise ValueError("entry must not contain control characters")
     text.encode("utf-8")  # raises if the text is not valid UTF-8
 
 
